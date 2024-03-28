@@ -82,7 +82,7 @@ class PrmsBuilder(object):
         dimension_defaults = paramfile_defaults["dimensions"]
 
         # get the nhru from the model grid
-        nhru = self.modelgrid.nrow * self.modelgrid.ncol
+        nhru = self.modelgrid.ncpl
 
         # set segment and reach
         if self.stream_data_obj is not None:
