@@ -411,6 +411,70 @@ def ssr2gw_exp(nhru):
     return record
 
 
+def unstructured_slowcoef_lin(ksat, aspect, hru_len):
+    """
+    Method to calculate the slowcoef_lin parameter in prms for unstructured
+    grids
+
+    Parameters
+    ----------
+    ksat : np.ndarray
+    aspect : np.ndarray
+    hru_len : np.ndarray
+
+    Returns
+    -------
+        gsflow.prms.ParameterRecord object
+    """
+    values = (
+            0.1 * np.abs(
+        ksat.ravel() * np.sin(aspect.ravel() * np.pi / 180.0)) / hru_len.ravel()
+    )
+
+    record = ParameterRecord(
+        "slowcoef_lin",
+        values,
+        dimensions=[
+            ["nhru", values.size],
+        ],
+        datatype=2,
+    )
+    return record
+
+
+def unstructured_slowcoef_sq(ksat, aspect, sand, soil_moist_max, hru_len):
+    """
+    Method to calculate the slowcoef_lin parameter in prms
+
+    Parameters
+    ----------
+    ksat : np.ndarray
+    aspect : np.ndarray
+    sand : np.ndarray
+        fraction of sand in soil
+    soil_moist_max : np.ndarray
+        soil moist max
+    hru_len : np.ndarray
+
+    Returns
+    -------
+        gsflow.prms.ParameterRecord object
+    """
+    values = 0.9 * np.abs(
+        (ksat.ravel() * np.sin(aspect.ravel() * np.pi / 180.0))
+        / (hru_len.ravel() * (sand.ravel() * soil_moist_max.ravel()))
+    )
+
+    record = ParameterRecord(
+        "slowcoef_sq",
+        values,
+        dimensions=[
+            ["nhru", values.size],
+        ],
+        datatype=2,
+    )
+    return record
+
 def slowcoef_lin(ksat, aspect, dx, dy):
     """
     Method to calculate the slowcoef_lin parameter in prms
