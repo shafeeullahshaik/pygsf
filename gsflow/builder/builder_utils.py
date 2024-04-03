@@ -465,6 +465,8 @@ def unstructured_slowcoef_sq(ksat, aspect, sand, soil_moist_max, hru_len):
         / (hru_len.ravel() * (sand.ravel() * soil_moist_max.ravel()))
     )
 
+    values = np.where(values > 1, 1, values)
+
     record = ParameterRecord(
         "slowcoef_sq",
         values,
@@ -578,6 +580,7 @@ def hru_percent_imperv(resampled_imperv):
     -------
         gsflow.prms.ParameterRecord object
     """
+    resampled_imperv[np.isnan(resampled_imperv)] = np.nanmean(resampled_imperv)
     record = ParameterRecord(
         "hru_percent_imperv",
         resampled_imperv.ravel(),

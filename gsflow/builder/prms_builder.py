@@ -159,7 +159,7 @@ class PrmsBuilder(object):
 
         param_dict = {}
         if self.cascades_obj.dany_flag:
-            hru_area = self.cascades_obj.hru_area
+            hru_area = self.cascades_obj.hru_area * area_conv
         else:
             cell_area = (self.modelgrid.xcs * self.modelgrid.ycs) * area_conv
             hru_area = np.full(nhru, cell_area)
