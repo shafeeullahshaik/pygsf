@@ -120,8 +120,8 @@ class PrmsParameters(ParameterBase):
         hru_down = self.hru_down_id.values
         hru_pct = self.hru_pct_up.values
         nhru = self.nhru.values[0]
-        conn = {i: [] for i in range(nhru)}
-        pct = {i: [] for i in range(nhru)}
+        conn = {i: [] for i in range(1, nhru + 1)}
+        pct = {i: [] for i in range(1, nhru + 1)}
         for ix, casc in enumerate(hru_up):
             conn[hru_down[ix]].append(casc)
             pct[hru_down[ix]].append(hru_pct[ix])

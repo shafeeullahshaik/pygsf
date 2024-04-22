@@ -159,6 +159,7 @@ class PrmsBuilder(object):
 
         param_dict = {}
         if self.cascades_obj.dany_flag:
+            # area_conv converts model unit area to acres for prms
             hru_area = self.cascades_obj.hru_area * area_conv
         else:
             cell_area = (self.modelgrid.xcs * self.modelgrid.ycs) * area_conv
