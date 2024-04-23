@@ -115,6 +115,10 @@ class PrmsParameters(ParameterBase):
         Returns
         -------
             dict : {hru_id : upslope neighbors}
+            Note: hru_id : upslope neighbors are both 1 based. The case of
+            hru_id = 0 corresponds to cascading flow where the user decides
+            to not explicitly include the stream hru cells as land surface
+            cascades.
         """
         hru_up = self.hru_up_id.values
         hru_down = self.hru_down_id.values
