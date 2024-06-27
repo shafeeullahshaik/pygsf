@@ -163,8 +163,8 @@ class PrmsBuilder(object):
             hru_area = self.cascades_obj.hru_area * area_conv
         else:
             hru_area = np.zeros(self.modelgrid.top.shape)
-            for i, delc in self.modelgrid.delc:
-                for j, delr in self.modelgrid.delr:
+            for i, delc in enumerate(self.modelgrid.delc):
+                for j, delr in enumerate(self.modelgrid.delr):
                     hru_area[i, j] = delc * delr * area_conv
 
         param_dict["hru_area"] = {"record": hru_area, "dtype": 2}
