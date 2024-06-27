@@ -162,8 +162,10 @@ class PrmsBuilder(object):
             # area_conv converts model unit area to acres for prms
             hru_area = self.cascades_obj.hru_area * area_conv
         else:
-            cell_area = (self.modelgrid.xcs * self.modelgrid.ycs) * area_conv
-            hru_area = np.full(nhru, cell_area)
+            hru_area = np.zeros(self.modelgrid.top.shape)
+            for i, delc in self.delc:
+                for j, delr in self.delr:
+                    hru_area[i, j] = delc * delr * area_conv
 
         param_dict["hru_area"] = {"record": hru_area, "dtype": 2}
 
