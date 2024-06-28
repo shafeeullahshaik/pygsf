@@ -167,7 +167,7 @@ class PrmsBuilder(object):
                 for j, delr in enumerate(self.modelgrid.delr):
                     hru_area[i, j] = delc * delr * area_conv
 
-        param_dict["hru_area"] = {"record": hru_area, "dtype": 2}
+        param_dict["hru_area"] = {"record": hru_area.ravel(), "dtype": 2}
 
         hru_lon = self.modelgrid.xcellcenters.ravel()
         hru_lat = self.modelgrid.ycellcenters.ravel()
